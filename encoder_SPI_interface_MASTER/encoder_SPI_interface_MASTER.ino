@@ -6,7 +6,7 @@ const int slaveSelectPin = 10;
 int sampleData = -30000;
 uint8_t MSB, LSB;
 // initialse Arduino-friendly settings (this *MUST* be the same for the Slave)
-SPISettings settingsA(8000000, MSBFIRST, SPI_MODE3);
+SPISettings settingsA(8000000, MSBFIRST, SPI_MODE3);    //Run the SPI at 8MHz in MODE 3 with MSB sent first
 
 void setup() {
   // set the slaveSelectPin as an output:
@@ -15,8 +15,8 @@ void setup() {
   // initialize SPI:
   SPI.begin();
 
-  LSB = lowByte(sampleData);
-  MSB = highByte(sampleData);
+  LSB = lowByte(sampleData);    //Data can only be sent as bytes - this splits the signed int (16bits) into
+  MSB = highByte(sampleData);   //two bytes, ready for sending.  These variables are created as uint8_t.
 }
 
 void loop() {
